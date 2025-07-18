@@ -94,4 +94,3 @@ Please allow 3-5 business days for data request processing. Academic collaborati
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-*This research was supported by the National Natural Science Foundation of China (Grant No. XXXXXXXX)*
