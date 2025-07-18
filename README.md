@@ -6,7 +6,7 @@ This repository contains the implementation code and analysis tools for our rese
 
 ## 📌 Contents
 - [Overview](#overview)
-- [Code Structure](#code-structure)
+- [Structure](#actual-code-structure)
 - [Data Description](#-data-description)
 - [Dependencies](#-dependencies)
 - [Usage](#-usage)
@@ -21,34 +21,48 @@ This project provides tools to:
 3. Evaluate receiver vulnerabilities based on experimental data
 4. Generate security assessment reports for static GNSS receivers
 
-## Code Structure
+## Structure
 ```
-├── src/                     # Main source code
-│   ├── spoofing_simulation/ # Spoofing scenario generators
-│   ├── signal_processing/   # GNSS signal analysis tools
-│   ├── vulnerability_assessment/ # Security metrics calculation
-│   └── utils/               # Helper functions
-├── configs/                 # Configuration files
-├── results/                 # Outputs directory (plots, reports)
-├── docs/                    # Documentation
-└── requirements.txt         # Python dependencies
+├── code/                     # Main MATLAB source code
+│   ├── calcLoopCoef.m        # Loop coefficient calculation
+│   ├── fCWIgen.m             # CW interference generator
+│   ├── fCnrEstV3.m           # CNR estimation
+│   ├── fCodeGen.m            # Code generation
+│   ├── fDataComb.m           # Data combination
+│   ├── fMyAcquisition.m      # Signal acquisition
+│   ├── fSigDataGen.m         # Signal data generation
+│   ├── initSettings.m        # System initialization
+│   ├── main.m                # Main processing script
+│   ├── makeCaTable.m         # CA code table generation
+│   ├── preRun.m              # Pre-run setup
+│   └── server_result_all.m   # Result compilation
+├── data_Array/               # GNSS dataset
+│   └── .gitkeep              # Placeholder for data
+├── data_jam/                 # Jamming  dataset
+│   └── .gitkeep              # Placeholder for data
+├── data_origin/              # Original dataset 
+│   ├── spoof_init_-0.5chips.DAT          # Spoofing scenario
+│   ├── spoof_init_-2.0chips.DAT          # Spoofing scenario
+│   ├── spoof_init_-4.0chips_0.1v_prn8.DAT  # Low-power spoof
+│   ├── spoof_init_-4.0chips_0.5v_prn8.DAT  # Medium-power spoof
+│   └── spoof_init_-4.0chips_1.5v_prn8.DAT  # High-power spoof
+├── LICENSE                   # MIT License
+└── README.md                 # Project documentation
 ```
 
 ## 🔍 Data Description
 The analysis relies on several large datasets:
 
-| Dataset Name | Description | Size | Format |
-|--------------|-------------|------|--------|
-| `raw_signals/` | Raw GNSS IF data samples | 78 GB | Binary (.bin) |
-| `processed_traces/` | Pre-processed signal traces | 42 GB | MATLAB (.mat) |
-| `spoofing_scenarios/` | Spoofing attack simulations | 35 GB | HDF5 (.h5) |
-| `receiver_logs/` | Receiver state recordings | 28 GB | CSV |
+| Dataset Directory | Content Type | Files | Format |
+|-------------------|-------------|-------|--------|
+| `data_origin/` | processing results | 5+ files | Binary (.Dat) |
+| `data_Array/` | GNSS dataset | Placeholder | N/A |
+| `data_jam/` | Jamming data | Placeholder | N/A |
 
 ### 🚫 Data Accessibility Note
-Due to the large size of the datasets (total **~183 GB**), they cannot be hosted directly on GitHub. The datasets contain:
+Due to the large size of the datasets, they cannot be hosted directly on GitHub. The datasets contain:
 - High-resolution GNSS intermediate frequency (IF) recordings
 - Multi-constellation signal captures (GPS, Galileo, Beidou)
-- 12-hour continuous static receiver observations
 - Spoofing attack scenarios with varying parameters (power levels, code offsets, etc.)
 
 ## ⬇️ Data Access
@@ -60,47 +74,13 @@ To request access to the datasets, please:
 We will provide download links via institutional file transfer service upon verification.
 
 ## 📦 Dependencies
-- Python 3.8+
-- Required packages:
-```bash
-pip install -r requirements.txt
-```
-Key dependencies:
-- `numpy`, `scipy`, `matplotlib`
-- `gnssutils` (v1.2.1+)
-- `h5py`, `pyarrow`
-- `scikit-learn` (for ML-based analysis)
+- MATLAB R2020b or later
+- Required MATLAB Toolboxes:
+  - Signal Processing Toolbox
+  - Communications Toolbox
+  - Parallel Computing Toolbox (recommended)
 
-## 🚀 Usage
-1. Clone repository:
-```bash
-git clone https://github.com/yourusername/Analysis-of-GNSS-Asynchronous-Spoofing-Pull-In-Rate.git
-```
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Run analysis with sample config:
-```bash
-python main.py --config configs/basic_scenario.yaml
-```
-
-4. Generate vulnerability report:
-```bash
-python reports/generate_report.py --input results/simulation_1.h5
-```
-
-## 📊 Results
-Example outputs include:
-- Pull-in rate vs. spoofing power relationships
-- Time-to-lock distributions under attack
-- Vulnerability heatmaps for different receiver types
-- ROC curves for spoofing detection methods
-
-![Example Pull-in Rate Analysis](docs/pull_in_curve_example.png)  
-*Figure: Pull-in rate dependence on spoofing signal power offset*
 
 ## 🤝 Contact & Data Access
 For dataset requests or technical inquiries:
