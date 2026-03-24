@@ -4,6 +4,8 @@
 
 This repository contains the implementation code and analysis tools for our research on **GNSS asynchronous spoofing pull-in rate** in static receivers. The work focuses on evaluating security vulnerabilities of static GNSS receivers against asynchronous spoofing attacks.
 
+Y. Song et al., "**Analysis of GNSS Asynchronous Spoofing Pull-In Rate for Security Testing of Static Receiver**," in IEEE Transactions on Instrumentation and Measurement, doi: 10.1109/TIM.2026.3674288.
+
 ## 📌 Contents
 - [Overview](#overview)
 - [Structure](#actual-code-structure)
